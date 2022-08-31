@@ -1,0 +1,8 @@
+# docker-compose.yml
+
+version: '3.9'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev

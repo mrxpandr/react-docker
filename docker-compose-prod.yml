@@ -1,0 +1,14 @@
+# docker-compose.yml
+
+version: '3.9'
+services:
+  frontend:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        - REACT_APP_NAME=MRX-APP-PROD
+    ports:
+      - '8080:80'

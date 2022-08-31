@@ -1,0 +1,29 @@
+# Dockerfile
+
+#Stage 1
+# Pull the base image
+FROM node:alpine as build
+
+# Set the working directory
+WORKDIR /usr/app
+
+# Copy app dependencies to container
+COPY ./package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy app dependencies to container
+COPY ./ ./
+
+# Setup ARGS
+ARG REACT_APP_NAME
+
+# Deploy app for local development
+RUN npm run build
+
+
+#Stage 2
+# Pull the base image
+FROM nginx
+COPY --from=build /usr/app/build /usr/share/nginx/html
